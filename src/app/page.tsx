@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import ImageCarousel from "@/components/ImageCarousel";
 import RomanticSection from "@/components/RomanticSection";
 import BackgroundMusic from "@/components/BackgroundMusic";
