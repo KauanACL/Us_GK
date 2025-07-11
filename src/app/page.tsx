@@ -1,103 +1,64 @@
+"use client";
 import Image from "next/image";
+import ImageCarousel from "@/components/ImageCarousel";
+import RomanticSection from "@/components/RomanticSection";
+import BackgroundMusic from "@/components/BackgroundMusic";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [showRomantic, setShowRomantic] = useState(false);
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [musicStarted, setMusicStarted] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  // Remove o autoplay e o scroll-trigger do BackgroundMusic
+  // O botão de play centralizado inicia a experiência
+
+  useEffect(() => {
+    if (musicStarted) {
+      const timer = setTimeout(() => setShowCarousel(true), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [musicStarted]);
+
+  return (
+    <div className="relative bg-black min-h-screen">
+      <BackgroundMusic forcePlay={musicStarted} />
+      {!musicStarted ? (
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <button
+            className="rounded-full p-8 bg-pink-600 hover:bg-pink-700 shadow-2xl transition-colors text-white text-5xl focus:outline-none focus:ring-4 focus:ring-pink-400 flex flex-col items-center"
+            onClick={() => setMusicStarted(true)}
+            aria-label="Tocar música e começar surpresa"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" strokeWidth={1.5} stroke="currentColor" className="w-20 h-20">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v32l28-16-28-16z" />
+            </svg>
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      ) : (
+        <>
+          {/* Seção do título */}
+          <div className="pt-20 pb-10 text-center min-h-screen flex items-center justify-center">
+            <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-600 drop-shadow-lg transition-all duration-1000">
+              Bom dia meu amor, aqui está uma pequena surpresa para você!
+            </h1>
+          </div>
+
+          {/* Seção do carrossel */}
+          {showCarousel && (
+            <div className="px-4 transition-opacity duration-1000 opacity-100">
+              <ImageCarousel onEnd={() => setShowRomantic(true)} />
+            </div>
+          )}
+
+          {/* Seção romântica com transição suave */}
+          {showRomantic && (
+            <div className="transition-all duration-1000 ease-in-out">
+              <RomanticSection />
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }
