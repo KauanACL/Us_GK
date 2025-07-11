@@ -1,8 +1,13 @@
 "use client";
+import { Analytics } from "@vercel/analytics/next";
 import ImageCarousel from "@/components/ImageCarousel";
 import RomanticSection from "@/components/RomanticSection";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import { useState, useEffect } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+<SpeedInsights/>;
+<Analytics/>;
 
 export default function Home() {
   const [showRomantic, setShowRomantic] = useState(false);
