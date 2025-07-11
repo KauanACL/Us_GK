@@ -94,7 +94,7 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
           </div>
           
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-sm text-gray-600 bg-white bg-opacity-80 px-4 py-2 rounded-full">
-            Role a página para ver as próximas imagens
+            Memórias de nossos momentos juntos!
           </div>
         </div>
       </div>
