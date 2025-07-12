@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-  "/IMG1.jpg",
   "/IMG7.JPG",
   "/IMG8.JPEG",
   "/IMG10.JPG",
