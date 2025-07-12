@@ -44,7 +44,7 @@ export default function Home() {
           {/* Seção do título */}
           <div className="pt-20 pb-10 text-center min-h-screen flex items-center justify-center">
             <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-600 drop-shadow-lg transition-all duration-1000">
-              Bom dia meu amor, aqui está uma pequena surpresa para você!
+              Gillian te amo demais!
             </h1>
           </div>
 
