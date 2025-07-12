@@ -2,9 +2,21 @@
 import { useEffect, useRef, useState } from "react";
 
 const images = [
-  "/img1.jpg",
-  "/img2.jpg", 
-  "/img3.jpg",
+  "/IMG1.jpg",
+  "/IMG7.JPG",
+  "/IMG8.JPEG",
+  "/IMG10.JPG",
+  "/IMG11.JPG",
+  "/IMG12.jpg",
+  "/IMG13.JPG",
+  "/IMG14.JPG",
+  "/IMG15.JPG",
+  "/IMG16.JPG",
+  "/IMG18.JPG",
+  "/IMG19.heic",
+  "/IMG20.HEIC",
+  "/IMG21.JPG",
+  "/IMG22.JPG",
   // Adicione mais imagens conforme necessário
 ];
 
@@ -37,7 +49,7 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
         if (imageIndex === images.length - 1 && !hasReachedEnd) {
           setHasReachedEnd(true);
           // Aguardar um pouco mais antes de mostrar a próxima seção
-          setTimeout(() => onEnd(), 2000);
+          setTimeout(() => onEnd(), 0);
         }
       }
     };
@@ -49,7 +61,7 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
   return (
     <div ref={containerRef} className="w-full max-w-4xl mx-auto relative">
       {/* Container principal com altura para scroll */}
-      <div className="h-[400vh] relative">
+      <div className="h-[2000vh] relative">
         {/* Carrossel fixo que se move com o scroll */}
         <div 
           className="sticky top-1/2 transform -translate-y-1/2 w-full flex justify-center"
@@ -57,7 +69,7 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
             transform: `translateY(${scrollProgress * 50}px)`
           }}
         >
-          <div className="relative h-96 w-full max-w-2xl rounded-lg shadow-lg overflow-hidden">
+          <div className="relative h-100 w-full max-w-2xl rounded-lg shadow-lg overflow-hidden">
             {images.map((src, idx) => (
               <div
                 key={idx}
@@ -93,9 +105,7 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
             ))}
           </div>
           
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-sm text-gray-600 bg-white bg-opacity-80 px-4 py-2 rounded-full">
-            Role a página para ver as próximas imagens
-          </div>
+          
         </div>
       </div>
     </div>
