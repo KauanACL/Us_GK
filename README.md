@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💕 US_GK
 
-## Getting Started
+> Site romântico personalizado — um presente digital feito com código e muito amor.
 
-First, run the development server:
+🔗 **[us-gk.vercel.app](https://us-gk.vercel.app)**
+
+---
+
+## 📌 Sobre o Projeto
+
+O **US_GK** é uma página web criada como presente para a namorada. O site conta a história do casal através de uma experiência imersiva: começa com um vídeo de abertura, passa por uma galeria de fotos dos momentos vividos juntos e termina com uma dedicatória e um contador em tempo real mostrando quantos segundos o casal está junto.
+
+Cada detalhe foi pensado para ser único — da identidade visual (preto + rosa pink) à experiência de quem abre o site.
+
+---
+
+## ⚙️ Tecnologias
+
+- **Next.js** + **TypeScript**
+- **Tailwind CSS**
+- **CSS Animations** — transições e efeitos visuais
+- **Vercel** — deploy
+
+---
+
+## ✨ Funcionalidades
+
+- **Tela de abertura com vídeo** — fundo preto com botão de play em rosa para iniciar a experiência
+- **Galeria de fotos em carrossel** — 14 fotos do casal navegáveis com indicador de posição
+- **Dedicatória personalizada** — texto escrito à mão com mensagem de amor
+- **Contador em tempo real** — exibe quantos segundos o casal está junto, atualizado ao vivo segundo a segundo
+- **Identidade visual imersiva** — tema dark com degradê roxo/rosa e tipografia impactante
+
+---
+
+## 🎨 Design
+
+| Elemento | Escolha |
+|---|---|
+| Fundo | Preto (`#000`) |
+| Cor de destaque | Rosa pink (`#FF0090`) |
+| Contador | Gradiente roxo → rosa |
+| Tipografia | Bold, clean e moderna |
+
+---
+
+## 🚀 Como Rodar
 
 ```bash
+git clone https://github.com/KauanACL/us-gk.git
+cd us-gk
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse: `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Para personalizar: substitua as fotos em `/public`, edite a data de início do relacionamento no contador e atualize o texto da dedicatória.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🌐 Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Hospedado na **Vercel** com deploy automático a cada push na branch `main`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 👤 Autor
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desenvolvido por **Kauan** com 💕 — [LinkedIn](https://linkedin.com/in/kauan-acl) · [GitHub](https://github.com/KauanACL)
