@@ -1,8 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ================================
+# SKA TOP / US_GK — .gitignore
+# Next.js + TypeScript + Tailwind CSS
+# ================================
 
-# dependencies
-/node_modules
-/.pnp
+# ───────────────────────────────
+# DEPENDÊNCIAS
+# ───────────────────────────────
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,32 +15,96 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# ───────────────────────────────
+# NEXT.JS
+# ───────────────────────────────
+.next/
+out/
+build/
+coverage/
 
-# next.js
-/.next/
-/out/
+# Cache do Next.js
+.swc/
 
-# production
-/build
+# ───────────────────────────────
+# VARIÁVEIS DE AMBIENTE
+# ───────────────────────────────
+.env
+.env.*
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+!.env.example
 
-# misc
+# ───────────────────────────────
+# VERCEL / DEPLOY
+# ───────────────────────────────
+.vercel
+.output
+
+# ───────────────────────────────
+# TYPESCRIPT
+# ───────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ───────────────────────────────
+# SISTEMA OPERACIONAL
+# ───────────────────────────────
+# macOS
 .DS_Store
-*.pem
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
-# debug
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ───────────────────────────────
+# EDITORES E IDES
+# ───────────────────────────────
+# VSCode
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains (WebStorm)
+.idea/
+*.iml
+
+# Vim / Neovim
+*.swp
+*.swo
+
+# ───────────────────────────────
+# LOGS E DEBUG
+# ───────────────────────────────
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# ───────────────────────────────
+# TESTES
+# ───────────────────────────────
+coverage/
+.nyc_output/
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# ───────────────────────────────
+# CERTIFICADOS
+# ───────────────────────────────
+*.pem
