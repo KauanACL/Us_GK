@@ -1,11 +1,12 @@
 import VersionedExperience from "@/components/VersionedExperience";
 import { siteVersions } from "@/data/siteVersions";
 
-export default function Home() {
+export default function FirstVersionPage() {
   return (
     <VersionedExperience
-      mode="birthday"
-      version={siteVersions["birthday-2026"]}
+      mode="classic"
+      version={siteVersions["first-version"]}
     />
   );
 }
+

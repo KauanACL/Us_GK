@@ -3,9 +3,13 @@ import { useEffect, useRef, useState } from "react";
 
 interface BackgroundMusicProps {
   forcePlay?: boolean;
+  src?: string;
 }
 
-export default function BackgroundMusic({ forcePlay }: BackgroundMusicProps) {
+export default function BackgroundMusic({
+  forcePlay,
+  src = "/music.mp3",
+}: BackgroundMusicProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -43,7 +47,7 @@ export default function BackgroundMusic({ forcePlay }: BackgroundMusicProps) {
           </svg>
         )}
       </button>
-      <audio ref={audioRef} src="/music.mp3" loop />
+      <audio ref={audioRef} src={src} loop />
       {showHint && (
         <div className="mt-2 px-4 py-2 bg-black bg-opacity-80 text-white rounded shadow text-sm animate-pulse">
           Clique no botão para ouvir a música!

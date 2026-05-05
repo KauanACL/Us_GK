@@ -1,29 +1,22 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const images = [
-  "/IMG7.JPG",
-  "/IMG8.JPEG",
-  "/IMG10.JPG",
-  "/IMG11.JPG",
-  "/IMG12.jpg",
-  "/IMG13.JPG",
-  "/IMG14.JPG",
-  "/IMG15.JPG",
-  "/IMG16.JPG",
-  "/IMG18.JPG",
-  "/IMG19.heic",
-  "/IMG20.HEIC",
-  "/IMG21.JPG",
-  "/IMG22.JPG",
-  // Adicione mais imagens conforme necessário
-];
-
-export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
+export default function ImageCarousel({
+  images,
+  onEnd,
+}: {
+  images: string[];
+  onEnd: () => void;
+}) {
   const [currentImage, setCurrentImage] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hasReachedEnd, setHasReachedEnd] = useState(false);
+  const safeImages = useMemo(
+    () => (images.length > 0 ? images : ["/IMG7.JPG"]),
+    [images],
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,82 +24,77 @@ export default function ImageCarousel({ onEnd }: { onEnd: () => void }) {
       const windowHeight = window.innerHeight;
       const containerTop = containerRef.current?.offsetTop || 0;
       const containerHeight = containerRef.current?.offsetHeight || 0;
-      
-      // Calcular progresso do scroll (0 a 1)
       const totalScrollDistance = containerHeight + windowHeight;
       const currentScrollDistance = scrollTop - containerTop + windowHeight;
-      const progress = Math.max(0, Math.min(1, currentScrollDistance / totalScrollDistance));
-      
+      const progress = Math.max(
+        0,
+        Math.min(1, currentScrollDistance / totalScrollDistance),
+      );
+
       setScrollProgress(progress);
-      
-      // Calcular qual imagem deve ser mostrada
-      const imageIndex = Math.floor(progress * images.length);
-      if (imageIndex !== currentImage && imageIndex < images.length) {
+
+      const imageIndex = Math.floor(progress * safeImages.length);
+      if (imageIndex !== currentImage && imageIndex < safeImages.length) {
         setCurrentImage(imageIndex);
-        
-        // Marcar que chegou ao final, mas manter as imagens visíveis
-        if (imageIndex === images.length - 1 && !hasReachedEnd) {
+
+        if (imageIndex === safeImages.length - 1 && !hasReachedEnd) {
           setHasReachedEnd(true);
-          // Aguardar um pouco mais antes de mostrar a próxima seção
           setTimeout(() => onEnd(), 0);
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentImage, onEnd, hasReachedEnd]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [currentImage, onEnd, hasReachedEnd, safeImages]);
 
   return (
-    <div ref={containerRef} className="w-full max-w-4xl mx-auto relative">
-      {/* Container principal com altura para scroll */}
-      <div className="h-[2000vh] relative">
-        {/* Carrossel fixo que se move com o scroll */}
-        <div 
-          className="sticky top-1/2 transform -translate-y-1/2 w-full flex justify-center"
+    <div ref={containerRef} className="relative mx-auto w-full max-w-4xl">
+      <div
+        className="relative"
+        style={{ height: `${safeImages.length * 140}vh` }}
+      >
+        <div
+          className="sticky top-1/2 flex w-full justify-center"
           style={{
-            transform: `translateY(${scrollProgress * 50}px)`
+            transform: `translateY(calc(-50% + ${scrollProgress * 50}px))`,
           }}
         >
-          <div className="relative h-100 w-full max-w-2xl rounded-lg shadow-lg overflow-hidden">
-            {images.map((src, idx) => (
+          <div className="relative h-[70vh] max-h-[760px] min-h-[420px] w-full max-w-2xl overflow-hidden rounded-lg shadow-lg">
+            {safeImages.map((src, idx) => (
               <div
-                key={idx}
+                key={src}
                 className={`absolute inset-0 transition-opacity duration-1500 ${
-                  idx === currentImage ? 'opacity-100' : 'opacity-0'
+                  idx === currentImage ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <img 
-                  src={src} 
-                  alt={`Imagem ${idx + 1}`} 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    console.error(`Erro ao carregar imagem: ${src}`);
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='24' fill='%23999'%3EImagem %3C/tspan%3Etspan%3E${idx + 1}%3C/tspan%3E%3C/text%3E%3C/svg%3E";
-                  }}
+                <Image
+                  src={src}
+                  alt={`Foto ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 672px"
+                  className="object-cover"
+                  priority={idx === 0}
                 />
-                <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
-                  {idx + 1} de {images.length}
+                <div className="absolute bottom-4 left-4 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+                  {idx + 1} de {safeImages.length}
                 </div>
               </div>
             ))}
           </div>
-          
-          {/* Indicadores de progresso */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {images.map((_, idx) => (
+
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+            {safeImages.map((_, idx) => (
               <div
                 key={idx}
                 className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                  idx === currentImage ? 'bg-blue-600' : 'bg-gray-300'
+                  idx === currentImage ? "bg-rose-500" : "bg-white/50"
                 }`}
               />
             ))}
           </div>
-          
-          
         </div>
       </div>
     </div>
   );
-} 
+}

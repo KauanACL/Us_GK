@@ -1,4 +1,4 @@
-# 💕 US_GK
+# US_GK
 
 > Site romântico personalizado — um presente digital feito com código e muito amor.
 
@@ -8,9 +8,9 @@
 
 ## 📌 Sobre o Projeto
 
-O **US_GK** é uma página web criada como presente para a namorada. O site conta a história do casal através de uma experiência imersiva: começa com um vídeo de abertura, passa por uma galeria de fotos dos momentos vividos juntos e termina com uma dedicatória e um contador em tempo real mostrando quantos segundos o casal está junto.
+O **US_GK** é uma página web criada como presente para a namorada. O site agora funciona por versões: a página inicial exibe a versão especial de aniversário e a primeira versão continua guardada em `/primeira-versao`.
 
-Cada detalhe foi pensado para ser único — da identidade visual (preto + rosa pink) à experiência de quem abre o site.
+Cada detalhe foi pensado para ser único, com música, fotos, dedicatória e contador em tempo real mostrando há quantos segundos o casal está junto.
 
 ---
 
@@ -25,9 +25,10 @@ Cada detalhe foi pensado para ser único — da identidade visual (preto + rosa 
 
 ## ✨ Funcionalidades
 
-- **Tela de abertura com vídeo** — fundo preto com botão de play em rosa para iniciar a experiência
-- **Galeria de fotos em carrossel** — 14 fotos do casal navegáveis com indicador de posição
-- **Dedicatória personalizada** — texto escrito à mão com mensagem de amor
+- **Versões comemorativas** — `/` para a versão atual e `/primeira-versao` para relembrar a primeira experiência
+- **Tela de abertura com música** — botão de play para iniciar a surpresa
+- **Galeria de fotos em carrossel** — fotos do casal navegáveis com indicador de posição
+- **Dedicatória personalizada** — textos editáveis por versão
 - **Contador em tempo real** — exibe quantos segundos o casal está junto, atualizado ao vivo segundo a segundo
 - **Identidade visual imersiva** — tema dark com degradê roxo/rosa e tipografia impactante
 
@@ -55,7 +56,7 @@ npm run dev
 
 Acesse: `http://localhost:3000`
 
-> Para personalizar: substitua as fotos em `/public`, edite a data de início do relacionamento no contador e atualize o texto da dedicatória.
+> Para personalizar: edite as versões em `src/data/siteVersions.ts`, substitua as fotos em `/public`, troque a música e ajuste os textos da dedicatória.
 
 ---
 
