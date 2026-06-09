@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "US_GK | Gillian e Kauan",
   description:
-    "Um presente digital romantico com versoes especiais para datas importantes.",
+    "Um presente digital romântico com versões especiais para datas importantes.",
 };
 
 export default function RootLayout({

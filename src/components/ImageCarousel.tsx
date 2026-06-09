@@ -14,7 +14,7 @@ export default function ImageCarousel({
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hasReachedEnd, setHasReachedEnd] = useState(false);
   const safeImages = useMemo(
-    () => (images.length > 0 ? images : ["/IMG7.JPG"]),
+    () => (images.length > 0 ? images : ["/versions/2024-12-17/foto1.jpg"]),
     [images],
   );
 

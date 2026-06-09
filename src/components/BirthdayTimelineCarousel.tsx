@@ -20,8 +20,8 @@ export default function BirthdayTimelineCarousel({
         ? items
         : [
             {
-              src: "/IMG7.JPG",
-              title: "Nossa historia",
+              src: "/versions/2024-12-17/foto1.jpg",
+              title: "Nossa história",
               caption: "Adicione uma legenda para esta foto.",
             },
           ],
@@ -123,7 +123,7 @@ export default function BirthdayTimelineCarousel({
           <div className="flex w-full flex-col">
             <div className="mb-6 flex items-center justify-between text-sm text-rose-100/80">
               <span className="font-semibold uppercase tracking-[0.22em]">
-                Capitulo
+                Capítulo
               </span>
               <span>
                 {activeIndex + 1}/{safeItems.length}
@@ -162,7 +162,7 @@ export default function BirthdayTimelineCarousel({
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-rose-100 text-[#17080c] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-30"
                   onClick={goNext}
                   disabled={activeIndex === safeItems.length - 1}
-                  aria-label="Proxima foto"
+                  aria-label="Próxima foto"
                 >
                   <ChevronIcon direction="next" />
                 </button>
@@ -218,7 +218,7 @@ function CarouselButton({
       }`}
       onClick={onClick}
       disabled={disabled}
-      aria-label={isPrevious ? "Foto anterior" : "Proxima foto"}
+      aria-label={isPrevious ? "Foto anterior" : "Próxima foto"}
     >
       <ChevronIcon direction={direction} />
     </button>

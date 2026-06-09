@@ -8,7 +8,7 @@ interface BackgroundMusicProps {
 
 export default function BackgroundMusic({
   forcePlay,
-  src = "/music.mp3",
+  src = "/versions/2024-12-17/music.mp3",
 }: BackgroundMusicProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);

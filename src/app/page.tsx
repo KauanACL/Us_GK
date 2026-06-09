@@ -1,11 +1,17 @@
 import VersionedExperience from "@/components/VersionedExperience";
-import { siteVersions } from "@/data/siteVersions";
+import {
+  getLatestSiteVersion,
+  getVersionSummaries,
+} from "@/lib/siteVersionAssets";
 
 export default function Home() {
+  const version = getLatestSiteVersion();
+  const versions = getVersionSummaries();
+
   return (
     <VersionedExperience
-      mode="birthday"
-      version={siteVersions["birthday-2026"]}
+      version={version}
+      versions={versions}
     />
   );
 }

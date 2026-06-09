@@ -4,14 +4,13 @@ export type TimelinePhoto = {
   caption: string;
 };
 
-export type SiteVersion = {
-  id: "birthday-2026" | "first-version";
+export type VersionMode = "birthday" | "classic";
+
+export type SiteVersionConfig = {
+  date: string;
   label: string;
-  route: string;
-  musicSrc: string;
-  heroImage: string;
-  images: string[];
-  timeline?: TimelinePhoto[];
+  mode: VersionMode;
+  assetDir: string;
   startDate: string;
   title: string;
   subtitle: string;
@@ -20,154 +19,100 @@ export type SiteVersion = {
   paragraphs: string[];
   counterTitle: string;
   footerText: string;
+  heroPhotoNumber?: number;
+  timelineCaptions?: Record<number, Omit<TimelinePhoto, "src">>;
 };
 
-const sharedImages = [
-  "/IMG7.JPG",
-  "/IMG8.JPEG",
-  "/IMG10.JPG",
-  "/IMG11.JPG",
-  "/IMG12.jpg",
-  "/IMG13.JPG",
-  "/IMG14.JPG",
-  "/IMG15.JPG",
-  "/IMG16.JPG",
-  "/IMG18.JPG",
-  "/IMG19.jpg",
-  "/IMG20.jpg",
-  "/IMG21.JPG",
-  "/IMG22.JPG",
-];
+export type SiteVersion = SiteVersionConfig & {
+  route: string;
+  musicSrc: string;
+  heroImage: string;
+  images: string[];
+  timeline?: TimelinePhoto[];
+};
 
-const birthdayTimeline: TimelinePhoto[] = [
-  {
-    src: "/IMG7.JPG",
-    title: "O comeco do nosso album",
-    caption:
-      "A primeira parte dessa nova versao pode guardar aquela foto que abre a historia do aniversario.",
-  },
-  {
-    src: "/IMG8.JPEG",
-    title: "Seu sorriso em destaque",
-    caption:
-      "Troque esta frase por uma lembranca curta sobre o que voce sentiu nesse momento.",
-  },
-  {
-    src: "/IMG10.JPG",
-    title: "Um dia para lembrar",
-    caption:
-      "Aqui entra uma legenda simples, como se fosse uma pagina do diario de voces.",
-  },
-  {
-    src: "/IMG11.JPG",
-    title: "Nosso jeito",
-    caption:
-      "Use este espaco para uma frase leve, romantica ou ate uma brincadeira de voces.",
-  },
-  {
-    src: "/IMG12.jpg",
-    title: "Detalhes que ficam",
-    caption:
-      "A linha do tempo foi feita para cada foto ter seu proprio significado.",
-  },
-  {
-    src: "/IMG13.JPG",
-    title: "Mais uma memoria",
-    caption:
-      "Quando adicionar fotos novas, e so trocar o caminho da imagem e editar esta legenda.",
-  },
-  {
-    src: "/IMG14.JPG",
-    title: "Um capitulo nosso",
-    caption:
-      "Este bloco pode virar uma declaracao curta sobre um lugar, uma data ou uma sensacao.",
-  },
-  {
-    src: "/IMG15.JPG",
-    title: "O presente e voce",
-    caption:
-      "No aniversario dela, cada foto pode lembrar uma qualidade que voce ama nela.",
-  },
-  {
-    src: "/IMG16.JPG",
-    title: "Quando tudo fica melhor",
-    caption:
-      "A legenda pode ser direta: o que essa foto significa para voce.",
-  },
-  {
-    src: "/IMG18.JPG",
-    title: "Guardado com carinho",
-    caption:
-      "Mais um ponto da linha do tempo para preencher com uma memoria real.",
-  },
-  {
-    src: "/IMG19.jpg",
-    title: "Mais perto do dia 11",
-    caption:
-      "Este item ja usa a copia JPG para abrir bem em mais navegadores.",
-  },
-  {
-    src: "/IMG20.jpg",
-    title: "Uma versao nova",
-    caption:
-      "A ideia e que futuras datas possam ganhar novos capitulos como este.",
-  },
-  {
-    src: "/IMG21.JPG",
-    title: "Tudo que a gente construiu",
-    caption:
-      "Use esta parte para uma frase maior se quiser marcar uma lembranca importante.",
-  },
-  {
-    src: "/IMG22.JPG",
-    title: "Feliz aniversario, meu amor",
-    caption:
-      "A ultima foto fecha a galeria e leva para a dedicatória final da surpresa.",
-  },
-];
+export type SiteVersionSummary = {
+  date: string;
+  label: string;
+  route: string;
+};
 
-export const siteVersions: Record<SiteVersion["id"], SiteVersion> = {
-  "birthday-2026": {
-    id: "birthday-2026",
-    label: "Aniversario 11/06",
-    route: "/",
-    musicSrc: "/music.mp3",
-    heroImage: "/IMG22.JPG",
-    images: sharedImages,
-    timeline: birthdayTimeline,
+const birthdayTimelineCaptions: Record<number, Omit<TimelinePhoto, "src">> = {
+  1: {
+    title: "Primeira impressão",
+    caption:
+      "Chamou minha atenção logo de cara, linda demais, mas a gente nem esperava o que estava por vir.",
+  },
+  2: {
+    title: "O segundo pedido",
+    caption:
+      "Mesmo o pedido já tendo acontecido antes, eu ainda fiquei nervoso aqui.",
+  },
+  3: {
+    title: "Minha calmaria",
+    caption:
+      "Você tem o dom de me acalmar e deixar todos os momentos perfeitos.",
+  },
+  4: {
+    title: "Futura mãe de gêmeos",
+    caption:
+      "Sempre imagino como vai ser nossa família. Por enquanto, a previsão é de gêmeos lindos kkkkk.",
+  },
+  5: {
+    title: "Sempre comigo",
+    caption:
+      "Obrigado por estar sempre comigo. Quero que conte comigo para tudo.",
+  },
+  6: {
+    title: "Só gostei da foto mesmo",
+    caption: "A criatividade sumiu.",
+  },
+};
+
+export const siteVersionConfigs: SiteVersionConfig[] = [
+  {
+    date: "2026-06-11",
+    label: "Aniversário 11/06",
+    mode: "birthday",
+    assetDir: "2026-06-11",
     startDate: "2024-12-17T00:00:00",
-    title: "Feliz aniversario, Gillian",
+    title: "Feliz aniversário, Amor",
     subtitle:
-      "Uma nova versao do nosso cantinho, preparada para guardar o dia 11/06 do jeito que ele merece.",
-    playLabel: "Comecar surpresa de aniversario",
-    dedicationTitle: "Para o seu dia",
+      "Uma nova versão do nosso canto para comemorar essa data tão especial do jeito que você merece.",
+    playLabel: "Começar surpresa de aniversário",
+    dedicationTitle: "Dedicatória",
     paragraphs: [
-      "Hoje a surpresa e para celebrar voce: sua forma de sorrir, de cuidar, de iluminar os lugares e de deixar tudo mais bonito so por estar por perto.",
-      "Este espaco vai ganhar novas fotos, uma nova musica e pequenas lembrancas desse aniversario. A estrutura ja esta pronta para voce trocar cada detalhe quando quiser.",
-      "Que este dia seja leve, feliz e cheio de amor. Eu amo caminhar ao seu lado e poder comemorar mais um capitulo da sua vida.",
+      "Fiz essa lembrança para você, a pessoa que alegra os meus dias e que, por onde passa, deixa sua marca.",
+      "Para você, que me mostra como é amar, viver uma parceria, cultivar uma amizade, confiar, se dedicar e se preocupar.",
+      "Você, Gillian, é tudo para mim. Amo seus olhos, seus sorrisos e suas risadas; amo sua voz, que tem efeitos em mim que você nem imagina. Eu te amo, e nunca se esqueça disso nem pense o contrário. Obrigado por tudo.",
     ],
-    counterTitle: "Te amo ha",
+    counterTitle: "Te amo há",
     footerText:
-      "E que venham muitas outras datas para transformar em novas versoes da nossa historia.",
+      "E que venham muitas outras datas para transformar em novas versões da nossa história.",
+    heroPhotoNumber: 1,
+    timelineCaptions: birthdayTimelineCaptions,
   },
-  "first-version": {
-    id: "first-version",
-    label: "Primeira versao",
-    route: "/primeira-versao",
-    musicSrc: "/music.mp3",
-    heroImage: "/IMG7.JPG",
-    images: sharedImages,
+  {
+    date: "2024-12-17",
+    label: "Primeira versão",
+    mode: "classic",
+    assetDir: "2024-12-17",
     startDate: "2024-12-17T00:00:00",
-    title: "Gillian te amo demais!",
-    subtitle: "A primeira versao desse presente digital.",
-    playLabel: "Tocar musica e comecar surpresa",
-    dedicationTitle: "Uma pequena dedicatoria",
+    title: "Gillian, eu te amo demais!",
+    subtitle: "A primeira versão desse presente digital.",
+    playLabel: "Tocar música e começar surpresa",
+    dedicationTitle: "Uma pequena dedicatória",
     paragraphs: [
-      "Cada dia ao seu lado e um presente que eu guardo no coracao. Sua presenca ilumina meus dias e faz tudo ter mais sentido.",
-      "Voce e minha inspiracao, minha forca e minha alegria. Juntos construimos memorias que ficarao para sempre em nossos coracoes.",
-      "Obrigado por ser exatamente quem voce e e por me fazer tao feliz. Te amo mais a cada dia que passa.",
+      "Cada dia ao seu lado é um presente que eu guardo no coração. Sua presença ilumina meus dias e faz tudo ter mais sentido.",
+      "Você é minha inspiração, minha força e minha alegria. Juntos construímos memórias que ficarão para sempre em nossos corações.",
+      "Obrigado por ser exatamente quem você é e por me fazer tão feliz. Te amo mais a cada dia que passa.",
     ],
-    counterTitle: "Te amo ha",
-    footerText: "E sempre vou te amar, hoje, amanha e para sempre!",
+    counterTitle: "Te amo há",
+    footerText: "E sempre vou te amar, hoje, amanhã e para sempre!",
+    heroPhotoNumber: 1,
   },
-};
+];
+
+export const sortedSiteVersionConfigs = [...siteVersionConfigs].sort((a, b) =>
+  b.date.localeCompare(a.date),
+);

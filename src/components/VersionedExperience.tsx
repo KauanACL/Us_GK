@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useEffect, useState } from "react";
@@ -8,16 +7,17 @@ import BackgroundMusic from "@/components/BackgroundMusic";
 import BirthdayTimelineCarousel from "@/components/BirthdayTimelineCarousel";
 import ImageCarousel from "@/components/ImageCarousel";
 import RomanticSection from "@/components/RomanticSection";
-import type { SiteVersion } from "@/data/siteVersions";
+import VersionSidebar from "@/components/VersionSidebar";
+import type { SiteVersion, SiteVersionSummary } from "@/data/siteVersions";
 
 type VersionedExperienceProps = {
   version: SiteVersion;
-  mode: "birthday" | "classic";
+  versions: SiteVersionSummary[];
 };
 
 export default function VersionedExperience({
   version,
-  mode,
+  versions,
 }: VersionedExperienceProps) {
   const [musicStarted, setMusicStarted] = useState(false);
   const [showCarousel, setShowCarousel] = useState(false);
@@ -30,11 +30,15 @@ export default function VersionedExperience({
     return () => window.clearTimeout(timer);
   }, [musicStarted]);
 
-  if (mode === "classic") {
+  if (version.mode === "classic") {
     return (
       <div className="relative min-h-screen bg-black">
         <Analytics />
         <SpeedInsights />
+        <VersionSidebar
+          versions={versions}
+          currentVersionDate={version.date}
+        />
         <BackgroundMusic forcePlay={musicStarted} src={version.musicSrc} />
         {!musicStarted ? (
           <StartScreen
@@ -61,7 +65,6 @@ export default function VersionedExperience({
             {showRomantic && (
               <div className="transition-all duration-1000 ease-in-out">
                 <RomanticSection version={version} />
-                <VersionFooter currentRoute={version.route} />
               </div>
             )}
           </>
@@ -74,6 +77,10 @@ export default function VersionedExperience({
     <div className="relative min-h-screen overflow-hidden bg-[#080506] text-white">
       <Analytics />
       <SpeedInsights />
+      <VersionSidebar
+        versions={versions}
+        currentVersionDate={version.date}
+      />
       <BackgroundMusic forcePlay={musicStarted} src={version.musicSrc} />
 
       {!musicStarted ? (
@@ -89,11 +96,10 @@ export default function VersionedExperience({
                   11 de junho
                 </p>
                 <h2 className="text-3xl font-bold text-white sm:text-5xl">
-                  Mais uma data guardada na nossa historia
+                  Vivemos muitos momentos nesses quase 1 ano e meio juntos
                 </h2>
                 <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-rose-50/70">
-                  Uma selecao de capitulos para guardar esse aniversario com
-                  carinho.
+                  Aqui vão alguns momentos da nossa vida juntos.
                 </p>
               </div>
               <BirthdayTimelineCarousel
@@ -168,7 +174,7 @@ function BirthdayStart({
           aria-label={version.playLabel}
         >
           <PlayIcon className="h-5 w-5" />
-          Comecar
+          Começar
         </button>
       </div>
     </main>
@@ -177,17 +183,18 @@ function BirthdayStart({
 
 function BirthdayHero({ version }: { version: SiteVersion }) {
   return (
-    <section className="flex min-h-screen items-center justify-center px-6 py-24 text-center">
-      <div className="max-w-4xl">
-        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-rose-200/80">
-          Nova versao
-        </p>
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-24 text-center">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${version.heroImage})` }}
+      />
+      <div className="absolute inset-0 bg-black/65" />
+
+      <div className="relative z-10 max-w-4xl">
         <h1 className="text-4xl font-black leading-tight text-white sm:text-6xl">
-          Um presente novo para uma data que merece ficar guardada.
+          Mais um ano de vida. Amo passar essa data com você e quero passar
+          todas pelo resto da minha vida.
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-rose-50/85">
-          {version.subtitle}
-        </p>
       </div>
     </section>
   );
@@ -198,36 +205,12 @@ function BirthdayClosing({ version }: { version: SiteVersion }) {
     <footer className="bg-[#12080b] px-6 py-16 text-center">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-3xl font-black text-white sm:text-5xl">
-          Feliz aniversario, meu amor.
+          Feliz aniversário, meu amor.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-rose-50/80">
           {version.footerText}
         </p>
-        <div className="mt-10">
-          <Link
-            href="/primeira-versao"
-            className="inline-flex items-center justify-center rounded-full border border-rose-200/40 px-5 py-3 text-sm font-semibold text-rose-50 transition hover:border-rose-100 hover:bg-white hover:text-[#17080c]"
-          >
-            Primeira versao
-          </Link>
-        </div>
       </div>
-    </footer>
-  );
-}
-
-function VersionFooter({ currentRoute }: { currentRoute: string }) {
-  const href = currentRoute === "/" ? "/primeira-versao" : "/";
-  const label = currentRoute === "/" ? "Primeira versao" : "Versao aniversario";
-
-  return (
-    <footer className="bg-black px-6 py-10 text-center">
-      <Link
-        href={href}
-        className="inline-flex items-center justify-center rounded-full border border-pink-300/40 px-5 py-3 text-sm font-semibold text-pink-100 transition hover:border-pink-100 hover:bg-pink-100 hover:text-black"
-      >
-        {label}
-      </Link>
     </footer>
   );
 }

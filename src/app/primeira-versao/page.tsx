@@ -1,12 +1,5 @@
-import VersionedExperience from "@/components/VersionedExperience";
-import { siteVersions } from "@/data/siteVersions";
+import { redirect } from "next/navigation";
 
 export default function FirstVersionPage() {
-  return (
-    <VersionedExperience
-      mode="classic"
-      version={siteVersions["first-version"]}
-    />
-  );
+  redirect("/2024-12-17");
 }
-
