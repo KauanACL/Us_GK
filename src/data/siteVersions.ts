@@ -88,7 +88,7 @@ export const siteVersionConfigs: SiteVersionConfig[] = [
     ],
     counterTitle: "Te amo há",
     footerText:
-      "E que venham muitas outras datas para transformar em novas versões da nossa história.",
+      "Ah, e sabe um dos livros que você queria? Ele está na sua mesa, um pequeno presente para você.",
     heroPhotoNumber: 1,
     timelineCaptions: birthdayTimelineCaptions,
   },

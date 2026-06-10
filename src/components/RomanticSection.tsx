@@ -47,9 +47,11 @@ export default function RomanticSection({ version }: { version: SiteVersion }) {
             totalSeconds={totalSeconds}
           />
         )}
-      <p className="text-white text-sm mt-4 opacity-90">
-        {version.footerText}
-      </p>
+      {!isBirthdayVersion && (
+        <p className="text-white text-sm mt-4 opacity-90">
+          {version.footerText}
+        </p>
+      )}
     </div>
   </div>
 
